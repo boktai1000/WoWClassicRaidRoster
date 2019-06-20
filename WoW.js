@@ -7,27 +7,27 @@ const fs = require('fs');
 console.log(classes['warrior'])
 client.on("ready",()=>{
     console.log(`${client.user.username} is now online!!`);
-    client.guilds.get("579098072974491654").channels.get("579098380089688084").send("** **");
+    client.guilds.get("561403936276217866").channels.get("571080855544659991").send("** **");
 });
 
 client.on("guildMemberUpdate", (oldMember,newMember)=>{
-    if(newMember.guild.id !== "579098072974491654" || newMember.roles === oldMember.roles) return;
+    if(newMember.guild.id !== "561403936276217866" || newMember.roles === oldMember.roles) return;
     let member = newMember;
     let dps ;
     let healer;
     let tank;
     let message = [];
-    message.push(`**### Current Raid Roster - ${member.guild.members.filter(m=>m.roles.find(r=>Object.keys(classes).includes(r.name.toLowerCase())) && m.roles.has('579099155599851531')).size} ###**`);
+    message.push(`**### Current Raid Roster - ${member.guild.members.filter(m=>m.roles.find(r=>Object.keys(classes).includes(r.name.toLowerCase())) && m.roles.has('575846415897460747')).size} ###**`);
 
     member.guild.roles.filter(r=>Object.keys(classes).includes(r.name.toLowerCase())).forEach(r=>{
 
-        let members = member.guild.members.filter(m=>m.roles.has(r.id)&& m.roles.has('579099155599851531'));
+        let members = member.guild.members.filter(m=>m.roles.has(r.id)&& m.roles.has('575846415897460747'));
 
         message.push(`\n**${r.name} - ${members.size}**`);
         if(members.size > 0){
-            dps = members.map(m=>{if(m.roles.has('579099246616117292')) return m.user.username});
-            healer = members.map(m=>{if(m.roles.has('579099283530317825')) return m.user.username});
-            tank = members.map(m=>{if(m.roles.has('579099265658388490')) return m.user.username});
+            dps = members.map(m=>{if(m.roles.has('590759408984784907')) return m.user.username});
+            healer = members.map(m=>{if(m.roles.has('590759431554465827')) return m.user.username});
+            tank = members.map(m=>{if(m.roles.has('590759452194373652')) return m.user.username});
 
             if(dps[0] !== undefined && classes[r.name.toLowerCase()].includes('dps')){
                 message.push("**DPS:** "+dps.join(' '));
