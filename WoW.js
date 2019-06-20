@@ -22,22 +22,23 @@ client.on("guildMemberUpdate", (oldMember,newMember)=>{
     member.guild.roles.filter(r=>Object.keys(classes).includes(r.name.toLowerCase())).forEach(r=>{
 
         let members = member.guild.members.filter(m=>m.roles.has(r.id)&& m.roles.has('575846415897460747'));
-
         message.push(`\n**${r.name} - ${members.size}**`);
+        
         if(members.size > 0){
-            dps = members.map(m=>{if(m.roles.has('590759408984784907')) return m.user.username});
-            healer = members.map(m=>{if(m.roles.has('590759431554465827')) return m.user.username});
-            tank = members.map(m=>{if(m.roles.has('590759452194373652')) return m.user.username});
+            dps = members.map(m=>{if(m.roles.has('590759408984784907')) return m.user.username}).filter(m=>m);
+            healer = members.map(m=>{if(m.roles.has('590759431554465827')) return m.user.username}).filter(m=>m);
+            tank = members.map(m=>{if(m.roles.has('590759452194373652')) return m.user.username}).filter(m=>m);
 
-            if(dps[0] !== undefined && classes[r.name.toLowerCase()].includes('dps')){
+            if(dps.length && classes[r.name.toLowerCase()].includes('dps')){
                 message.push("**DPS:** "+dps.join(' '));
             }
-            if(healer[0] !== undefined && classes[r.name.toLowerCase()].includes('healer')){
+            if(healer.length && classes[r.name.toLowerCase()].includes('healer')){
                 message.push("**Healer:** "+healer.join(' '));
             }
-            if(tank[0] !== undefined && classes[r.name.toLowerCase()].includes('tank')){
+            if(tank.length && classes[r.name.toLowerCase()].includes('tank')){
                 message.push("**Tank:** "+tank.join(' '));
-            }       
+            }  
+               
         }
     });
 
